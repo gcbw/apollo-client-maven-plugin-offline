@@ -14,5 +14,59 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.apollographql.apollo</groupId>
+      <artifactId>apollo-runtime</artifactId>
+      <!-- <version>2.5.9</version> -->
+      <version>1.4.4</version>
+    </dependency>
+    <!-- Optional, needed only for ANNOTATED nullable type-->
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>22.0.0</version>
+    </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- <groupId>com.github.aoudiamoncef</groupId>
+              <artifactId>apollo-client-maven-plugin</artifactId>
+              <version>4.0.5</version>
+        -->
+        <groupId>com.github.sparow199</groupId>
+        <artifactId>apollo-client-maven-plugin</artifactId>
+        <version>2.2.3</version>
+        <!--
+        4.0.5 do exist in .../artifactory/maven-remote-repos/com/github/sparow199/apollo-client-maven-plugin/ but fails here. not sure what is going on...
+        -->
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <!-- 4.x config:
+              <services>
+                <example-api>
+                  <compilationUnit>
+                    <name>example</name>
+                    <compilerParams>
+                      <rootPackageName>com.example.offlineapollo</rootPackageName>
+                    </compilerParams>
+                  </compilationUnit>
+                </example-api>
+              </services> -->
+              <!-- 2.x settings: -->
+              <generateIntrospectionFile>true</generateIntrospectionFile>
+              <schemaUrl>https://graphqlzero.almansi.me/api</schemaUrl>
+              <generateIntrospectionFile>true</generateIntrospectionFile>
+              <rootPackageName>com.example.App</rootPackageName>
+              <addSourceRoot>false</addSourceRoot>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
